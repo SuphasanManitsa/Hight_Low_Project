@@ -113,33 +113,61 @@ balance = 100
 
 
 
-# def f(balance,day,hit):
-#     a = []
-#     for i in range(day):
-#         if balance <= 0:
-#             print(balance)
-#             break
-#         # print(f"day {i + 1}")
-#         balance_day = balance
-#         stop_loss = balance - balance * 0.0001
-#         stop_win = balance + balance * 0.0002
+def f(balance,day,hit):
+    a = []
+    for i in range(day):
+        if balance <= 0:
+            print(balance)
+            break
+        # print(f"day {i + 1}")
+        balance_day = balance
+        stop_loss = balance - balance * 0.0001
+        stop_win = balance + balance * 0.0002
         
-#         while True:
-#             # print(f"time {j +  1}")
-#             if balance <= stop_loss or balance >= stop_win:
-#                 break
-#             balance_cp = balance
-#             balance = hl.teng(balance = balance,hit = hit,n = 1,re = 0,a = 1)
+        while True:
+            # print(f"time {j +  1}")
+            if balance <= stop_loss or balance >= stop_win:
+                break
+            balance_cp = balance
+            balance = hl.teng(balance = balance,hit = hit,n = 1,re = 0,a = 1)
 
-#             if balance < balance_cp:
-#                 # print("loss")
-#                 hit *= 2
-#             else:
-#                 # print("win")
-#                 hit = balance_day * 0.000001
-#         a.append(balance)
-#     # print("-------")
-#     return a
+            if balance < balance_cp:
+                # print("loss")
+                hit *= 2
+            else:
+                # print("win")
+                hit = balance_day * 0.000001
+        a.append(balance)
+    # print("-------")
+    return a
+
+def f2(balance,day,hit):
+    a = []
+    for i in range(day):
+        if balance <= 0:
+            print(balance)
+            break
+        # print(f"day {i + 1}")
+        balance_day = balance
+        stop_loss = balance - balance * 0.0001
+        stop_win = balance + balance * 0.0002
+        
+        while True:
+            # print(f"time {j +  1}")
+            if balance <= stop_loss or balance >= stop_win:
+                break
+            balance_cp = balance
+            balance = hl.teng(balance = balance,hit = hit,n = 1,re = 0,a = 1)
+
+            if balance > balance_cp:
+                # print("loss")
+                hit *= 2
+            else:
+                # print("win")
+                hit = balance_day * 0.000001
+        a.append(balance)
+    # print("-------")
+    return a
 
 # import numpy as np
 # import matplotlib.pyplot as plt
@@ -147,8 +175,29 @@ balance = 100
 # hit = balance * 0.000001
 # day = 1 * 30 * 12
 # yy = np.array(f(balance=balance,day=day,hit=hit))
+# yyy = np.array(f2(balance=balance,day=day,hit=hit))
 # xx = np.linspace(1,len(yy),len(yy))
-# print(len(xx))
-# print(len(yy))
-# plt.plot(xx,yy)
+# xxx = np.linspace(1,len(yyy),len(yyy))
+# plt.plot(xxx,yyy)
 # plt.show()
+n = 100000
+rate = np.linspace(0,1,n)
+balance = 100
+a = []
+for i in rate:
+    # balance_cp = balance
+    balance = hl.teng(balance = balance,hit = 1,n = 1,re = 0,a = 1,gong = [1,i])
+    # if balance < balance_cp:
+    #     balance = hl.teng(balance = balance,hit = 1,n = 1,re = 0,a = 1,gong = [1,i])
+    a.append(balance)
+p = np.poly1d(np.polyfit(rate, a, 5))
+plt.plot(rate,p(rate))
+plt.plot(rate,a)
+
+for i in np.roots(p):
+    print("%.5f" % i)
+    print("%.5f" % p(i))
+    print("--")
+
+plt.show()
+

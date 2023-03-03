@@ -21,13 +21,22 @@ class Hight_Low:
         sum = A + B + C
         return A,B,C,sum
 
-    def teng(self,balance,hit,n,re : bool,a):
+    def teng(self,balance,hit,n,re : bool,a,gong = []):
         '''
         re == 0 : return balance
         re == 1 : return static win
+        
+        gong[0] == 1 : gong
+        gong[0] == 0 : no gong
+        gong[1] == 0 : persen gong
         '''
         A,B,C,sum = self.mon_sim(n)
         vA = np.where(np.logical_or(np.logical_or(A == a, B == a), C == a), 1, 0)
+        
+        if gong[0] == 1:
+            b = np.random.uniform(0,1,n)
+            vA = np.where(vA == 1, 1,np.where(b <= gong[1],1,0))
+            
         cost = np.sum(np.where(vA == 1, hit,hit * (-1)))
         static_win = np.sum(np.where(vA == 1, 1, 0))
         static_loss = np.sum(np.where(vA == 0, 1, 0))
@@ -36,15 +45,24 @@ class Hight_Low:
         else:
             return static_win / n
         
-    def tode(self,balance,hit,n,re : bool,a = []):
+    def tode(self,balance,hit,n,re : bool,a = [],gong = []):
         '''
         re == 0 : return balance
         re == 1 : return static win
+        
+        gong[0] == 1 : gong
+        gong[0] == 0 : no gong
+        gong[1] == 0 : persen gong
         '''
         A,B,C,sum = self.mon_sim(n)
         vA = np.where(np.logical_or(np.logical_or(A == a[0], B == a[0]), C == a[0]), 1, 0)
         vB = np.where(np.logical_or(np.logical_or(A == a[1], B == a[1]), C == a[1]), 1, 0)
         vAB = vA * vB
+        
+        if gong[0] == 1:
+            b = np.random.uniform(0,1,n)
+            vAB = np.where(vAB == 1, 1,np.where(b <= gong[1],1,0))
+            
         cost = np.sum(np.where(vAB == 1, hit * 5,hit * (-1)))
         static_win = np.sum(vAB)
         static_loss = np.sum(np.where(vAB == 0, 1, 0))
@@ -53,17 +71,26 @@ class Hight_Low:
         else:
             return static_win / n
         
-    def hight_low(self,balance,hit,n,re : bool,a):
+    def hight_low(self,balance,hit,n,re : bool,a,gong = []):
         '''
         a == 1 == hight
         a == 0 == low
         re == 0 : return balance
         re == 1 : return static win
+        
+        gong[0] == 1 : gong
+        gong[0] == 0 : no gong
+        gong[1] == 0 : persen gong
         '''
         A,B,C,sum = self.mon_sim(n)
         vA = np.where(np.logical_and(sum < 11, a == 0), 1, 0)
         vB = np.where(np.logical_and(sum > 11, a == 1), 1, 0)
         vAB = vA + vB
+        
+        if gong[0] == 1:
+            b = np.random.uniform(0,1,n)
+            vAB = np.where(vAB == 1, 1,np.where(b <= gong[1],1,0))
+            
         cost = np.sum(np.where(vAB == 1, hit, (-1) * hit))
         static_win = np.sum(vAB)
         static_loss = np.sum(np.where(vAB == 0, 1, 0))
@@ -72,13 +99,22 @@ class Hight_Low:
         else:
             return static_win / n
         
-    def mid_hight_low(self,balance,hit,n,re : bool):
+    def mid_hight_low(self,balance,hit,n,re : bool,gong = []):
         '''
         re == 0 : return balance
         re == 1 : return static win
+        
+        gong[0] == 1 : gong
+        gong[0] == 0 : no gong
+        gong[1] == 0 : persen gong
         '''
         A,B,C,sum = self.mon_sim(n)
         vA = np.where(sum == 11, 1, 0)
+        
+        if gong[0] == 1:
+            b = np.random.uniform(0,1,n)
+            vA = np.where(vA == 1, 1,np.where(b <= gong[1],1,0))
+            
         cost = np.sum(np.where(vA == 1, hit * 5,hit * (-1)))
         static_win = np.sum(vA)
         static_loss = np.sum(np.where(vA == 0, 1, 0))
@@ -87,13 +123,22 @@ class Hight_Low:
         else:
             return static_win / n
 
-    def tong(self,balance,hit,n,re : bool,a):
+    def tong(self,balance,hit,n,re : bool,a,gong = []):
         '''
         re == 0 : return balance
         re == 1 : return static win
+        
+        gong[0] == 1 : gong
+        gong[0] == 0 : no gong
+        gong[1] == 0 : persen gong
         '''
         A,B,C,sum = self.mon_sim(n)
         vA = np.where(np.logical_and(np.logical_and(A == a, B == a), C == a), 1, 0)
+        
+        if gong[0] == 1:
+            b = np.random.uniform(0,1,n)
+            vA = np.where(vA == 1, 1,np.where(b <= gong[1],1,0))
+        
         cost = np.sum(np.where(vA == 1, hit * 5,hit * (-1)))
         static_win = np.sum(vA)
         static_loss = np.sum(np.where(vA == 0, 1, 0))
@@ -102,18 +147,27 @@ class Hight_Low:
         else:
             return static_win / n
 
-    def hight_low_whit_args(self,balance,hit,n,re : bool,a = []):
+    def hight_low_whit_args(self,balance,hit,n,re : bool,a = [],gong = []):
         '''
         a[0] == 1 == hight
         a[0] == 0 == low
         a[1] == 1 - 6
         re == 0 : return balance
         re == 1 : return static win
+        
+        gong[0] == 1 : gong
+        gong[0] == 0 : no gong
+        gong[1] == 0 : persen gong
         '''
         A,B,C,sum = self.mon_sim(n)
         vA = np.where(np.logical_and(np.logical_and(a[0] == 1,sum > 11),np.logical_or(np.logical_or(A == a[1], B == a[1]), C == a[1])), 1, 0)
         vB = np.where(np.logical_and(np.logical_and(a[0] == 0,sum < 11),np.logical_or(np.logical_or(A == a[1], B == a[1]), C == a[1])), 1, 0)
         vAB = vA + vB
+        
+        if gong[0] == 1:
+            b = np.random.uniform(0,1,n)
+            vAB = np.where(vAB == 1, 1,np.where(b <= gong[1],1,0))
+            
         cost = np.sum(np.where(vAB == 1, hit * 2,hit * (-1)))
         static_win = np.sum(vAB)
         static_loss = np.sum(np.where(vAB == 0, 1, 0))
