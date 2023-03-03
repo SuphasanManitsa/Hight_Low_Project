@@ -69,36 +69,36 @@ balance = 100
 # plt.show()
 #-----------------------------------
 # จากข้อสรูป จากกว่ารับเทส 10 ล้านครั้ง 9 รอบ พบว่า อัตราการชนะของการเล่น ตองของแต่ละเลข อยู่ที่ราวๆ 0.46%
-plt.figure(figsize = (12,12))
-for i in range(9):
-    plt.subplot(3,3,i+1)
-    a = []
-    for j in range(6):
-        a.append(hl.tong(balance = balance,hit = 1,n = 10000000,re = 1,a = j + 1))
-        plt.xlim(0,7)
-    plt.plot(range(1,7),a,"o")
-    plt.title(f'Round {i + 1}')
-plt.show()
+# plt.figure(figsize = (12,12))
+# for i in range(9):
+#     plt.subplot(3,3,i+1)
+#     a = []
+#     for j in range(6):
+#         a.append(hl.tong(balance = balance,hit = 1,n = 10000000,re = 1,a = j + 1))
+#         plt.xlim(0,7)
+#     plt.plot(range(1,7),a,"o")
+#     plt.title(f'Round {i + 1}')
+# plt.show()
 #-----------------------------------
-plt.figure(figsize = (12,12))
-for i in range(3):
-    plt.subplot(2,3,i+1)
-    a = []
-    for j in range(1,7):
-        a.append(hl.hight_low_whit_args(balance = balance,hit = 1,n = 100000,re = 1,a = [0,j]))
-    plt.xlim(0,7)
-    plt.plot(range(1,7),a)
-    plt.title(f'low {i + 1}')
+# plt.figure(figsize = (12,12))
+# for i in range(3):
+#     plt.subplot(2,3,i+1)
+#     a = []
+#     for j in range(1,7):
+#         a.append(hl.hight_low_whit_args(balance = balance,hit = 1,n = 100000,re = 1,a = [0,j]))
+#     plt.xlim(0,7)
+#     plt.plot(range(1,7),a)
+#     plt.title(f'low {i + 1}')
     
-for i in range(3,6):
-    plt.subplot(2,3,i+1)
-    a = []
-    for j in range(1,7):
-        a.append(hl.hight_low_whit_args(balance = balance,hit = 1,n = 100000,re = 1,a = [1,j]))
-    plt.xlim(0,7)
-    plt.plot(range(1,7),a)
-    plt.title(f'hight {i - 2}')
-plt.show()
+# for i in range(3,6):
+#     plt.subplot(2,3,i+1)
+#     a = []
+#     for j in range(1,7):
+#         a.append(hl.hight_low_whit_args(balance = balance,hit = 1,n = 100000,re = 1,a = [1,j]))
+#     plt.xlim(0,7)
+#     plt.plot(range(1,7),a)
+#     plt.title(f'hight {i - 2}')
+# plt.show()
 #-----------------------------------
 
 
@@ -113,33 +113,33 @@ plt.show()
 
 
 
-def f(balance,day,hit):
-    a = []
-    for i in range(day):
-        if balance <= 0:
-            print(balance)
-            break
-        # print(f"day {i + 1}")
-        balance_day = balance
-        stop_loss = balance - balance * 0.0001
-        stop_win = balance + balance * 0.0002
+# def f(balance,day,hit):
+#     a = []
+#     for i in range(day):
+#         if balance <= 0:
+#             print(balance)
+#             break
+#         # print(f"day {i + 1}")
+#         balance_day = balance
+#         stop_loss = balance - balance * 0.0001
+#         stop_win = balance + balance * 0.0002
         
-        while True:
-            # print(f"time {j +  1}")
-            if balance <= stop_loss or balance >= stop_win:
-                break
-            balance_cp = balance
-            balance = hl.teng(balance = balance,hit = hit,n = 1,re = 0,a = 1)
+#         while True:
+#             # print(f"time {j +  1}")
+#             if balance <= stop_loss or balance >= stop_win:
+#                 break
+#             balance_cp = balance
+#             balance = hl.teng(balance = balance,hit = hit,n = 1,re = 0,a = 1)
 
-            if balance < balance_cp:
-                # print("loss")
-                hit *= 2
-            else:
-                # print("win")
-                hit = balance_day * 0.000001
-        a.append(balance)
-    # print("-------")
-    return a
+#             if balance < balance_cp:
+#                 # print("loss")
+#                 hit *= 2
+#             else:
+#                 # print("win")
+#                 hit = balance_day * 0.000001
+#         a.append(balance)
+#     # print("-------")
+#     return a
 
 # import numpy as np
 # import matplotlib.pyplot as plt
@@ -150,18 +150,5 @@ def f(balance,day,hit):
 # xx = np.linspace(1,len(yy),len(yy))
 # print(len(xx))
 # print(len(yy))
-# plt.plot(xx,yy,"o")
+# plt.plot(xx,yy)
 # plt.show()
-# for i in range(100000000):
-#     # print(f"time {j +  1}")
-#     if balance <= 0:
-#         break
-#     balance_cp = balance
-#     balance = hl.teng(balance = balance,hit = hit,n = 1,re = 0,a = 1)
-
-#     if balance < balance_cp:
-#         # print("loss")
-#         hit *= 2
-#     else:
-#         # print("win")
-#         hit = balance * 0.000001
