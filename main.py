@@ -190,14 +190,14 @@ for i in rate:
     # if balance < balance_cp:
     #     balance = hl.teng(balance = balance,hit = 1,n = 1,re = 0,a = 1,gong = [1,i])
     a.append(balance)
-p = np.poly1d(np.polyfit(rate, a, 5))
+p = np.poly1d(np.polyfit(rate, a, 2))
 plt.plot(rate,p(rate))
 plt.plot(rate,a)
 
+p = np.polyder(p, m=1)
 for i in np.roots(p):
     print("%.5f" % i)
     print("%.5f" % p(i))
     print("--")
 
 plt.show()
-
