@@ -175,3 +175,49 @@ class Hight_Low:
             return balance + cost
         else:
             return static_win / n
+
+    def f1(self,balance,day,hit,gong = []):
+        a = []
+        for i in range(day):
+            if balance <= 0:
+                print(balance)
+                break
+            balance_day = balance
+            stop_loss = balance - balance * 0.02
+            stop_win = balance + balance * 0.03
+            
+            while True:
+                if balance <= stop_loss or balance >= stop_win:
+                    break
+                balance_cp = balance
+                balance = self.hight_low(balance = balance,hit = hit,n = 1,re = 0,a = 0,gong = gong)
+
+                if balance < balance_cp:
+                    hit *= 2
+                else:
+                    hit = balance_day * 0.01
+            a.append(balance)
+        return a
+
+    def f2(self,balance,day,hit,gong = []):
+        a = []
+        for i in range(day):
+            if balance <= 0:
+                print(balance)
+                break
+            balance_day = balance
+            stop_loss = balance - balance * 0.0001
+            stop_win = balance + balance * 0.0002
+            
+            while True:
+                if balance <= stop_loss or balance >= stop_win:
+                    break
+                balance_cp = balance
+                balance = self.hight_low(balance = balance,hit = hit,n = 1,re = 0,a = 0,gong = gong)
+
+                if balance > balance_cp:
+                    hit *= 2
+                else:
+                    hit = balance_day * 0.000001
+            a.append(balance)
+        return a
