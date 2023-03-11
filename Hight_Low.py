@@ -11,10 +11,6 @@ class Hight_Low:
         return arr.reshape(-1, la)
 
     def mon_sim(self,n):
-        # c == 1 แทงเต็ง คือ แทงแต้ม 1-6 ถ้าทายถูกอย่างน้อย 1 ใน 3 จะได้เงิน 1 ต่อ 1
-        # c == 2 แทงโต๊ด คือ แทงทีละ 2 แต้ม ลูกเต๋า 2 ใน 3 ถ้าทายถูกอย่างน้อย 2 ใน 3 จะได้เงิน 5 ต่อ 1
-        # c == 3 แทงสูงต่ำ คือ 3-10 == ต่ำ : 12-18 == สูง จะได้เงิน 1 ต่อ 1
-        # c == 4 แทง 11 ไฮโล คือ ถ้าผลรวมของลูกเต๋าทั้ง 3 ลูก == 11 จะได้เงิน 5 ต่อ 1
         A = np.random.choice(a=[1, 2, 3, 4, 5, 6], size=n, replace=True)
         B = np.random.choice(a=[1, 2, 3, 4, 5, 6], size=n, replace=True)
         C = np.random.choice(a=[1, 2, 3, 4, 5, 6], size=n, replace=True)
@@ -147,7 +143,7 @@ class Hight_Low:
         else:
             return static_win / n
 
-    def hight_low_whit_args(self,balance,hit,n,re : bool,a = [],gong = []):
+    def hight_low_whit_number(self,balance,hit,n,re : bool,a = [],gong = []):
         '''
         a[0] == 1 == hight
         a[0] == 0 == low
@@ -183,8 +179,8 @@ class Hight_Low:
                 print(balance)
                 break
             balance_day = balance
-            stop_loss = balance - balance * 0.02
-            stop_win = balance + balance * 0.03
+            stop_loss = balance - balance * 0.0002
+            stop_win = balance + balance * 0.0003
             
             while True:
                 if balance <= stop_loss or balance >= stop_win:
@@ -195,7 +191,7 @@ class Hight_Low:
                 if balance < balance_cp:
                     hit *= 2
                 else:
-                    hit = balance_day * 0.01
+                    hit = balance_day * 0.000001
             a.append(balance)
         return a
 
@@ -221,3 +217,24 @@ class Hight_Low:
                     hit = balance_day * 0.000001
             a.append(balance)
         return a
+    
+    def pud_sed(self,a):
+        a,b = str(a).split(".")
+        b = (b + "00")[:3]
+        a += b[:2]
+        a = list(a[::-1])
+        b = int(b[2])
+        if b >= 5:
+            for i in range(len(a)):
+                if i == len(a) - 1 and a[i] == "9":
+                    a[i] = "0"
+                    a += ["1"]
+                    break
+                if a[i] == "9":
+                    a[i] = "0"
+                else:
+                    a[i] = str(int(a[i]) + 1)
+                    break
+        a.insert(2,".")
+        a = "".join(a)[::-1]
+        return float(a)
