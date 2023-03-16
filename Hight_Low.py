@@ -176,17 +176,17 @@ class Hight_Low:
         a = []
         for i in range(day):
             if balance <= 0:
-                print(balance)
                 break
             balance_day = balance
-            stop_loss = balance - balance * 0.0002
-            stop_win = balance + balance * 0.0003
+            stop_win = balance + balance *  0.00003
+                                            #0.000001 == 1
+            stop_loss = balance - balance * 0.00002
             
             while True:
                 if balance <= stop_loss or balance >= stop_win:
                     break
                 balance_cp = balance
-                balance = self.hight_low(balance = balance,hit = hit,n = 1,re = 0,a = 0,gong = gong)
+                balance = self.hight_low(balance = balance,hit = hit,n = day,re = 0,a = 0,gong = gong)
 
                 if balance < balance_cp:
                     hit *= 2
@@ -199,19 +199,42 @@ class Hight_Low:
         a = []
         for i in range(day):
             if balance <= 0:
-                print(balance)
                 break
             balance_day = balance
-            stop_loss = balance - balance * 0.0001
-            stop_win = balance + balance * 0.0002
+            stop_win = balance + balance *  0.00003
+                                            #0.000001 == 1
+            stop_loss = balance - balance * 0.00002
             
             while True:
                 if balance <= stop_loss or balance >= stop_win:
                     break
                 balance_cp = balance
-                balance = self.hight_low(balance = balance,hit = hit,n = 1,re = 0,a = 0,gong = gong)
+                balance = self.hight_low(balance = balance,hit = hit,n = day,re = 0,a = 0,gong = gong)
 
                 if balance > balance_cp:
+                    hit *= 2
+                else:
+                    hit = balance_day * 0.000001
+            a.append(balance)
+        return a
+    
+    def f3(self,balance,day,hit,gong = []):
+        a = []
+        for i in range(day):
+            if balance <= 0:
+                break
+            balance_day = balance
+            stop_win = balance + balance *  0.00003
+                                            #0.000001 == 1
+            stop_loss = balance - balance * 0.00002
+            
+            while True:
+                if balance <= stop_loss or balance >= stop_win:
+                    break
+                balance_cp = balance
+                balance = self.hight_low_whit_number(balance = balance,hit = hit,n = day,re = 0,a = [0,1],gong = gong)
+
+                if balance < balance_cp:
                     hit *= 2
                 else:
                     hit = balance_day * 0.000001

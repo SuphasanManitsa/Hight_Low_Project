@@ -87,19 +87,20 @@ plt.show()
 #     plt.subplot(2,3,i+1)
 #     a = []
 #     for j in range(1,7):
-#         a.append(hl.hight_low_whit_number(balance = balance,hit = 1,n = 100000,re = 1,a = [0,j],gong = [0,0]))
+#         a.append(hl.hight_low_whit_number(balance = balance,hit = 1,n = 10000000,re = 1,a = [0,j],gong = [0,0]))
 #     plt.xlim(0,7)
 #     plt.plot(range(1,7),a)
 #     plt.title(f'low {i + 1}')
-    
+# print(a)
 # for i in range(3,6):
 #     plt.subplot(2,3,i+1)
 #     a = []
 #     for j in range(1,7):
-#         a.append(hl.hight_low_whit_number(balance = balance,hit = 1,n = 100000,re = 1,a = [1,j],gong = [0,0]))
+#         a.append(hl.hight_low_whit_number(balance = balance,hit = 1,n = 10000000,re = 1,a = [1,j],gong = [0,0]))
 #     plt.xlim(0,7)
 #     plt.plot(range(1,7),a)
 #     plt.title(f'hight {i - 2}')
+# print(a)
 # plt.show()
 #-----------------------------------
 
@@ -123,28 +124,31 @@ plt.show()
     # ถ้าถึงแล้วให้จบการเล่นของวันนั้น
     # แล้ววันต่อมาให้คำนวนขนาดไม้ไหม่ และ stop win and stop loss ไหม่
 # กราฟจะมีเทรนเป็นขาขึ้นแต่ก็มีโอกาศแพ้ได้ ถ้า stop loss ติดๆกันหลายวัน
-# import numpy as np
-# import matplotlib.pyplot as plt
 # plt.figure(figsize = (12,12))
 # balance = 1000000
 # hit = balance * 0.000001
 # day = 1 * 30 * 12
 # for i in range(9):
 #     plt.subplot(3,3,i+1)
-#     # yyy = np.array(hl.f1(balance=balance,day=day,hit=hit,gong = [0,0]))
-#     # xxx = np.linspace(1,len(yyy),len(yyy))
-#     # plt.plot(xxx,yyy)
+
+#     yyy = np.array(hl.f1(balance=balance,day=day,hit=hit,gong = [0,0]))
+#     xxx = np.linspace(1,len(yyy),len(yyy))
+#     plt.plot(xxx,yyy)
     
 #     yy = np.array(hl.f2(balance=balance,day=day,hit=hit,gong = [0,0]))
 #     xx = np.linspace(1,len(yy),len(yy))
 #     plt.plot(xx,yy)
+
+#     y = np.array(hl.f3(balance=balance,day=day,hit=hit,gong = [0,0]))
+#     x = np.linspace(1,len(yyy),len(yyy))
+#     plt.plot(x,y)
+
 #     plt.title(f'Round {i + 1}')
 # plt.show()
 
 
-
-
 #-----------------------------------
+# balance = 1000
 # balance = 1000
 # for i in range(1,7):
 #     teng = hl.teng(balance = balance,hit = 100,n = 10000000,re = 1,a = i,gong=[0,0])
@@ -178,7 +182,7 @@ plt.show()
 # for i in range(2):
 #     for j in range(1,7):
 #         high_low_whit_args = hl.hight_low_whit_number(balance = balance,hit = 100,n = 10000000,re = 1,a = [i,j],gong=[0,0])
-#         print('Expectancy high_low_whit_args {0:d},{1:d}: {2:.2f}'.format(i,j,(2*100 * high_low_whit_args)+(-100 * (1-high_low_whit_args))))
+#         print('Expectancy high_low_whit_args {0:d},{1:d}: {2:.2f}'.format(i,j,(2*100 * high_low_whit_args)+(-100 * (1-high_low_whit_args))))\
 
 # def modetang(a,balance,h):
 #     if a == 1:
@@ -237,3 +241,22 @@ plt.show()
 
 # plt.show()
 #-----------------------------------
+
+# n = 1000
+# x = np.linspace(0,n,n)
+# balance = 100
+# a = []
+# plt.figure(figsize = (20,12))
+# w = 0
+# l = 0
+# for i in x:
+#     ba = balance
+#     balance = hl.hight_low(balance = balance,hit = 1,n = 1,re = 0,a = 0,gong=[0,0])
+#     if ba > balance:
+#         l += 1
+#     elif ba < balance:
+#         w += 1
+#     a.append(balance)
+# print(w,l)
+# plt.plot(x,a)
+# plt.show()
