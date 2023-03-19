@@ -6,18 +6,18 @@ balance = 100
 
 #-----------------------------------  teng
 # จากข้อสรูป จากกว่ารันเทส 10 ล้านครั้ง ในแต่ละเลขที่เลือกเต็ง พบว่า อัตราการการนะอยู่ที่ราวๆ 42% 
-plt.figure(figsize = (12,12))
-for j in range(9):
-    x = []
-    y = []
-    for i in range(1,7):
-        values = hl.teng(balance = balance,hit = 1,n = 10000000,re = 1,a = i,gong = [0,0])
-        x.append(i)
-        y.append(values)
-    plt.subplot(3,3,j+1)
-    plt.plot(x,y)
-    plt.title(f'Test No. {j + 1}')
-plt.show()
+# plt.figure(figsize = (12,12))
+# for j in range(9):
+#     x = []
+#     y = []
+#     for i in range(1,7):
+#         values = hl.teng(balance = balance,hit = 1,n = 10000000,re = 1,a = i,gong = [0,0])
+#         x.append(i)
+#         y.append(values)
+#     plt.subplot(3,3,j+1)
+#     plt.plot(x,y)
+#     plt.title(f'Test No. {j + 1}')
+# plt.show()
 #-----------------------------------  tode
 # จากข้อสรูป จากกว่ารับเทส 10 ล้านครั้ง ในแต่ละเลขที่เลือกโต๊ด พบว่า อัตราการการนะอยู่ที่ราวๆ 14% 
 # tod = []
@@ -260,3 +260,16 @@ plt.show()
 # print(w,l)
 # plt.plot(x,a)
 # plt.show()
+
+plt.figure(figsize = (20,12))
+for j in range(9):
+    x = []
+    y = []
+    for i in range(1,7):
+        values = hl.teng(balance = balance,hit = 1,n = 10000000,re = 1,a = i,gong = [1,0.50])
+        x.append(i)
+        y.append(values)
+    plt.subplot(3,3,j+1)
+    plt.plot(x,y,"o")
+    plt.title(f'Test No. {j + 1}')
+plt.show()
